@@ -1,7 +1,7 @@
 package application;
 
 public class Employee {
-	 private int id;
+	 private int EmployeeID;
 	 private double salary;
 	 private String name;
 	 private String ContactInfo;
@@ -16,10 +16,9 @@ public class Employee {
 	
 
 
-	public Employee(int id, double salary, String name, String contactInfo, String postion, String password,
+	public Employee( double salary, String name, String contactInfo, String postion, String password,
 			String address) {
 		super();
-		this.id = id;
 		this.salary = salary;
 		this.name = name;
 		ContactInfo = contactInfo;
@@ -28,14 +27,24 @@ public class Employee {
 		this.address = address;
 	}
 
-
+	public Employee(int id, double salary, String name, String contactInfo, String postion, String password,
+			String address) {
+		super();
+		this.EmployeeID=id;
+		this.salary = salary;
+		this.name = name;
+		ContactInfo = contactInfo;
+		this.postion = postion;
+		this.password = password;
+		this.address = address;
+	}
 
 	public int getId() {
-		return id;
+		return EmployeeID;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.EmployeeID = id;
 	}
 
 	public double getSalary() {
@@ -88,6 +97,13 @@ public class Employee {
 
 	public void setContactInfo(String contactInfo) {
 		ContactInfo = contactInfo;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Employee [EmployeeID=" + EmployeeID + ", salary=" + salary + ", name=" + name + ", ContactInfo="
+				+ ContactInfo + ", postion=" + postion + ", password=" + password + ", address=" + address + "]";
 	}
 	
 	 
