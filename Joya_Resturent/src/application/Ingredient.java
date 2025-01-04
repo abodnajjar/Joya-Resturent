@@ -9,6 +9,17 @@ public class Ingredient {
 	public Ingredient() {
 		super();
 	}
+	public Ingredient(int id,String name) {
+		super();
+		this.id=id;
+		this.name = name;
+	}
+	public Ingredient(String name, String supplier, double quantity_in_stock) {
+		super();
+		this.name = name;
+		this.supplier = supplier;
+		this.quantity_in_stock = quantity_in_stock;
+	}
 	public Ingredient(int id, String name, String supplier, double quantity_in_stock) {
 		super();
 		this.id = id;
@@ -36,6 +47,10 @@ public class Ingredient {
 	}
 	public double getQuantity_in_stock() {
 		return quantity_in_stock;
+	}
+	@Override
+	public String toString() {
+		return name;
 	}
 	public void setQuantity_in_stock(double quantity_in_stock) {
 		this.quantity_in_stock = quantity_in_stock;

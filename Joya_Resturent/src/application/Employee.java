@@ -21,7 +21,7 @@ public class Employee {
 		super();
 		this.salary = salary;
 		this.name = name;
-		ContactInfo = contactInfo;
+		this.ContactInfo = contactInfo;
 		this.postion = postion;
 		this.password = password;
 		this.address = address;
