@@ -12,10 +12,11 @@ public class Order {
 	public Order() {
 		super();
 	}
-	public Order( String date, String time,int customer_id, int employee_id,int payment_id  ) {
+	public Order( String date, String time,int customer_id, int employee_id,int payment_id,double pric  ) {
 		super();
 		this.date = date;
 		this.time = time;
+		this.price=pric;
 		this.customer_id = customer_id;
 		this.payment_id = payment_id;
 		this.employee_id = employee_id;
@@ -27,11 +28,12 @@ public class Order {
 		this.employee_id = employee_id;
 	}
 
-	public Order(int id, String date, String time, int customer_id, int payment_id,int employee_id) {
+	public Order(int id, String date, String time, int customer_id, int payment_id,int employee_id,double price) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.time = time;
+		this.price=price;
 		this.customer_id = customer_id;
 		this.payment_id = payment_id;
 		this.employee_id = employee_id;

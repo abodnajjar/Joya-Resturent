@@ -15,7 +15,7 @@ public class Test {
 		this.price = price;
 		Quatity = quatity;
 		Total_Price = total_Price;
-		GetPric() ;
+		//GetPric() ;
 	}
 
 	public void GetPric() {

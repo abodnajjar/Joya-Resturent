@@ -27,8 +27,8 @@ public class Order_Test {
 
 	public Order insertOrder(Order o) {
 
-		String sql = "INSERT INTO orders (OrderDate,OrderTime,CustomerID,EmployeeID,PaymentID) "
-				+ "VALUES (? , ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO orders (OrderDate,OrderTime,CustomerID,EmployeeID,PaymentID,TotalPrice) "
+				+ "VALUES (? , ?, ?, ?, ?,?)";
 		try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			// Set parameters
 
@@ -37,6 +37,7 @@ public class Order_Test {
 			preparedStatement.setInt(3,o.getCustomer_id());
 			preparedStatement.setInt(4,o.getEmployee_id());
 			preparedStatement.setInt(5,o.getPayment_id());
+			preparedStatement.setDouble(6,o.getPrice());
 			// Execute the query
 			int rowsInserted = preparedStatement.executeUpdate();
 			if (rowsInserted > 0) {
@@ -109,6 +110,10 @@ public class Order_Test {
 	public void updateorder_time(int order_id,String time) {
 		updateField("OrderTime",time, order_id);
 	}
+	
+	public void updatePrice(int order_id,double price) {
+		updateField("TotalPrice",price, order_id);
+	}
 
 	private void updateField(String fieldName, Object newValue, int order_Id) {
 		String query = "UPDATE orders SET " + fieldName + " = ? WHERE OrderID = ?";
@@ -131,9 +136,9 @@ public class Order_Test {
 				int customer_id = resultSet.getInt("CustomerID");
 				int employee_id = resultSet.getInt("EmployeeID");
 				int payment_id = resultSet.getInt("PaymentID");
-
-				order_list.add(new Order(order_id, date,time,customer_id,employee_id, payment_id ));
-			}
+				double price= resultSet.getInt("TotalPrice");
+				order_list.add(new Order(order_id, date,time,customer_id,employee_id, payment_id,price));
+			  }
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

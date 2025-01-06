@@ -83,30 +83,25 @@ public class menu_item_ingredient_Test {
 		return Menu_item_List;
 	}
 
-	public List<Menu_item> getIngredientsForMenuItem(int menuID) {
-		List<Menu_item> ingredients = new ArrayList<>();
-		String query = "SELECT i.IngredientId, i.IngredientName,i.price" +
-				"FROM ingredient AS i " +
-				"JOIN menu_item_ingredient AS m ON i.IngredientId = m.IngredientId " +
-				"WHERE m.MenuID = ?";
-
+	public List<Ingredient> getIngredientsForMenuItem(int menuID) {
+		List<Ingredient> ingredients = new ArrayList<>();
+		String query = "SELECT i.`IngredientId`, i.`IngredientName` ,i.`IngredientSupplier`,i.`quantity_in_stock`" +
+	               "FROM `ingredient` AS i " +
+	               "JOIN `menu_item_ingredient` AS m ON i.`IngredientId` = m.`IngredientId` " +
+	               "WHERE m.`MenuID` = ?";
 		try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-			// Set the MenuID parameter
-			preparedStatement.setInt(1, menuID);
-
-			// Execute the query and retrieve the result set
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				// Loop through the result set
-				while (resultSet.next()) {
-					int MenuID= resultSet.getInt("MenuID");
-					String ingredientName = resultSet.getString("MenuName");
-					int price= resultSet.getInt("price");
-					// Add the ingredient to the list
-					ingredients.add(new Menu_item(MenuID, ingredientName,price));
-				}
-			}
+		    preparedStatement.setInt(1, menuID);
+		    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+		        while (resultSet.next()) {
+		            int ingredientId = resultSet.getInt("IngredientId");
+		            String ingredientName = resultSet.getString("IngredientName");
+		            String ingredientSupplier = resultSet.getString("IngredientSupplier");
+					Double ingredientQuantity = resultSet.getDouble("quantity_in_stock");
+		            ingredients.add(new Ingredient(ingredientId, ingredientName,ingredientSupplier,ingredientQuantity));
+		        }
+		    }
 		} catch (SQLException e) {
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 
 		return ingredients;

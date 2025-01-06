@@ -49,7 +49,8 @@ public class menu_item_ingredient_Tabe {
 		nameColumn.setPrefWidth(200);
 
 		tableView.getColumns().addAll( idColumn, nameColumn );
-		item_ingredient_list.add((Ingredient) test.getIngredientsForMenuItem(id)); 
+		ArrayList<Ingredient> x=(ArrayList<Ingredient>) test.getIngredientsForMenuItem(id);
+		item_ingredient_list.addAll(x); 
 		tableView.setItems(item_ingredient_list);
 		FilteredList<Ingredient> filteredData = new FilteredList<Ingredient>(item_ingredient_list, p -> true);
 		tableView.setItems(filteredData);
@@ -80,8 +81,8 @@ public class menu_item_ingredient_Tabe {
 
 		// Button actions
 	
-			Ingredient_Test x=new Ingredient_Test();
-			List<Ingredient> ingredientsList = x.loadIngredientsFromDatabase();
+			Ingredient_Test x2=new Ingredient_Test();
+			List<Ingredient> ingredientsList = x2.loadIngredientsFromDatabase();
 			ComboBox<Ingredient> ingredientComboBox = new ComboBox<>();
 			ingredientComboBox.setValue(ingredientsList.get(1)); // Set the initial value
 			ingredientComboBox.getItems().addAll(ingredientsList);
@@ -98,7 +99,9 @@ public class menu_item_ingredient_Tabe {
 
 			        // Clear and update the list
 			        item_ingredient_list.clear();
-			        item_ingredient_list.add((Ingredient) test.getIngredientsForMenuItem(id));
+			        ArrayList<Ingredient> z=(ArrayList<Ingredient>) test.getIngredientsForMenuItem(id);
+					item_ingredient_list.addAll(z);
+			       
 
 			        // Close the relevant window or do further actions
 			       

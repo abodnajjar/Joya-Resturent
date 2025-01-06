@@ -30,18 +30,22 @@ public class order_items_Test {
 	}
 	
 	
-	public void addNewOrder_iteam(int o_id,int i_id,int quantity,double price) {
-        String query = "INSERT INTO order_items (OrderID,MenuID,Quantity,OrderPrice) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-        	preparedStatement.setInt(1,o_id);
-        	preparedStatement.setInt(2,i_id);
-        	preparedStatement.setInt(3,quantity);
-            preparedStatement.setDouble(4,price);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	public void addNewOrderItem(int o_id, int i_id, int quantity, double price) {
+	    String query = "INSERT INTO order_items (OrderID, MenuID, Quantity, OrderPrice) " +
+	                   "VALUES (?, ?, ?, ?) " +
+	                   "ON DUPLICATE KEY UPDATE " +
+	                   "Quantity = Quantity + VALUES(Quantity), " +
+	                   "OrderPrice = OrderPrice + VALUES(OrderPrice)";
+	    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setInt(1, o_id);
+	        preparedStatement.setInt(2, i_id);
+	        preparedStatement.setInt(3, quantity);
+	        preparedStatement.setDouble(4, price);
+	        preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	 public void deleteOrder_iteam(int o_id,int i_id) {
 	        String query = "DELETE FROM order_items WHERE OrderID= ? and MenuID=? ";
@@ -55,7 +59,7 @@ public class order_items_Test {
 	    }
 	
 
-	    private void update_Quatity_Price(int o_id,int i_id,int q,double price ) {
+	    public void update_Quatity_Price(int o_id,int i_id,int q,double price ) {
 	        String query = "UPDATE order_items SET Quantity = ?,OrderPrice= ? WHERE OrderID= ? and MenuID=?";
 	        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 	        	 preparedStatement.setInt(1,q);
@@ -67,12 +71,13 @@ public class order_items_Test {
 	            e.printStackTrace();
 	        }
 	    }
-	    public List<Ingredient> getIngredientsForMenuItem(int order_id) {
-		    List<Ingredient> ingredients = new ArrayList<>();
-		    String query = "SELECT i.MenuID`, i.MenuName " +
+	    
+	    public List<order_items> getIngredientsForMenuItem(int order_id) {
+		    List<order_items> order_items = new ArrayList<>();
+		    String query = "SELECT m.`OrderID` , m.`MenuID` ,m.`Quantity` ,m.`OrderPrice`" +
 		                   "FROM menu_item AS i " +
-		                   "JOIN order_items AS m ON i.MenuID= m.MenuID= " +
-		                   "WHERE m.OrderID = ?";
+		                   "JOIN order_items AS m ON i.`MenuID`= m.`MenuID`" +
+		                   "WHERE m.`OrderID` = ?";
 
 		    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 		        // Set the MenuID parameter
@@ -82,16 +87,17 @@ public class order_items_Test {
 		        try (ResultSet resultSet = preparedStatement.executeQuery()) {
 		            // Loop through the result set
 		            while (resultSet.next()) {
-		                int ingredientID = resultSet.getInt("IngredientId");
-		                String ingredientName = resultSet.getString("IngredientName");
-		               
-		                ingredients.add(new Ingredient(ingredientID, ingredientName));
+		                int ingredientID = resultSet.getInt("OrderID");
+		                int menua_id = resultSet.getInt("MenuID");
+		                int qantity= resultSet.getInt("Quantity");
+		                double cost = resultSet.getInt("OrderPrice");
+		                order_items.add(new order_items(ingredientID, menua_id,qantity,cost));
 		            }
 		        }
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
 
-		    return ingredients;
+		    return order_items;
 		}
 }
