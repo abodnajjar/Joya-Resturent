@@ -22,11 +22,11 @@ public class MyHome {
         hbox.setAlignment(Pos.CENTER);
         hbox.setPadding(new Insets(25));
 
-        StackPane emp = square("Number Of Employees", query.getTotalEmployees());
-        StackPane customer = square("Number Of Customers", query.getTotalCustomers());
-        StackPane order = square("Number Of Orders", query.getTotalOrders());
-        StackPane menu = square("Number Of MenuItems", query.getTotalMenuItems());
-        StackPane ingred = square("Number Of Ingredients", query.getTotalIngredient());
+        StackPane emp = square("# Employees", query.getTotalEmployees());
+        StackPane customer = square(" # Customers", query.getTotalCustomers());
+        StackPane order = square("# Orders", query.getTotalOrders());
+        StackPane menu = square("# MenuItems", query.getTotalMenuItems());
+        StackPane ingred = square("# Ingredients", query.getTotalIngredient());
         
         hbox.getChildren().addAll(emp, customer, order, menu, ingred);
         return hbox;
@@ -37,7 +37,7 @@ public class MyHome {
         StackPane stack = new StackPane();
         stack.setAlignment(Pos.CENTER);
 
-        Rectangle background = new Rectangle(150, 150);
+        Rectangle background = new Rectangle(100, 100);
         background.setArcWidth(20);
         background.setArcHeight(20);
         background.setFill(Color.LIGHTBLUE);

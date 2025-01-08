@@ -7,9 +7,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class TableViewCustomerPoints {
@@ -21,7 +24,14 @@ public class TableViewCustomerPoints {
     }
 
     public VBox createTableView() {
+    	Label lb=new Label("Customer with most Points");
 
+		lb.setAlignment(Pos.CENTER);
+		lb.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+		HBox hb=new HBox(lb);
+		hb.setAlignment(Pos.CENTER);
+    	
+    	
         TableView<Customer> tableView = new TableView<>();
         ObservableList<Customer> customerData = FXCollections.observableArrayList();
 
@@ -45,7 +55,7 @@ public class TableViewCustomerPoints {
 
 
         // Add TableView to BorderPane
-        VBox vbox = new VBox(tableView);
+        VBox vbox = new VBox(hb,tableView);
         return vbox;
     }
 }

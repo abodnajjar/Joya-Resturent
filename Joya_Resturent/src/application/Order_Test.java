@@ -19,7 +19,6 @@ public class Order_Test {
 					"computer2005"
 					);
 			statement = connection.createStatement();
-			System.out.println("Connection successful!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

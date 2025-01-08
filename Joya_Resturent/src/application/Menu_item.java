@@ -5,7 +5,8 @@ public class Menu_item {
 	 private String name; 
 	 private String descirption;
 	 private double price;
-	 private int ingredient_id;  
+//	 private int ingredient_id;  
+	 private int count=0;
 	 
 	 
 	public Menu_item() {
@@ -48,22 +49,27 @@ public class Menu_item {
 	public void setDescirption(String descirption) {
 		this.descirption = descirption;
 	}
-	public int getIngredient_id() {
-		return ingredient_id;
-	}
-	public void setIngredient_id(int ingredient_id) {
-		this.ingredient_id = ingredient_id;
-	}
+
 	public double getPrice() {
 		return price;
 	}
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	public void Increment_count() {
+		this.count=this.count+1;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	@Override
 	public String toString() {
 		return "Menu_item [id=" + id + ", name=" + name + ", descirption=" + descirption + ", price=" + price
-				+ ", ingredient_id=" + ingredient_id + "]";
+				+ ", ingredient_id=" +  "]";
 	}
 	 
 	 

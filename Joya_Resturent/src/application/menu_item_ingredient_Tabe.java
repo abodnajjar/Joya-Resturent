@@ -84,7 +84,7 @@ public class menu_item_ingredient_Tabe {
 			Ingredient_Test x2=new Ingredient_Test();
 			List<Ingredient> ingredientsList = x2.loadIngredientsFromDatabase();
 			ComboBox<Ingredient> ingredientComboBox = new ComboBox<>();
-			ingredientComboBox.setValue(ingredientsList.get(1)); // Set the initial value
+			ingredientComboBox.setValue(null); // Set the initial value
 			ingredientComboBox.getItems().addAll(ingredientsList);
 			vb1.getChildren().add(ingredientComboBox);
 			// Handle ComboBox selection change

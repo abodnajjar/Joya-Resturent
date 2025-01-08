@@ -102,7 +102,7 @@ package application;
 
 	   
 	    public double getTotalMoneyForDate(String date) {
-	        String query = "SELECT SUM(OrderPrice) AS totalMoney FROM orders WHERE OrderDate = ?;";
+	        String query = "SELECT SUM(TotalPrice) AS totalMoney FROM orders WHERE OrderDate = ?;";
 	        try (PreparedStatement stmt = connection.prepareStatement(query)) {
 	            stmt.setString(1, date); 
 	            try (ResultSet rs = stmt.executeQuery()) {
@@ -132,6 +132,7 @@ package application;
 	        }
 	        return 0.0;
 	    }
+	    
 	    
 	    public List<Customer> getCustomersByPointsDesc() {
 	        List<Customer> customers = new ArrayList<>();
@@ -171,30 +172,7 @@ package application;
 	        return ingredientList;
 	    }
 	    
-	    public List<Object[]> getTopSellingItems() {
-	        String query = "SELECT mi.MenuID, mi.MenuName, COUNT(o.MenuID) AS SalesCount " +
-	                       "FROM orders o " +
-	                       "JOIN menu_item mi ON o.MenuID = mi.MenuID " +
-	                       "GROUP BY mi.MenuID, mi.MenuName " +
-	                       "ORDER BY SalesCount DESC";
-
-	        List<Object[]> topSellingItems = new ArrayList<>();
-
-	        try (PreparedStatement stmt = connection.prepareStatement(query);
-	             ResultSet rs = stmt.executeQuery()) {
-	            while (rs.next()) {
-	                Object[] row = new Object[3];
-	                row[0] = rs.getInt("MenuID");
-	                row[1] = rs.getString("MenuName");
-	                row[2] = rs.getInt("SalesCount");
-	                topSellingItems.add(row);
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-
-	        return topSellingItems;
-	    }
+	
 
 
 }

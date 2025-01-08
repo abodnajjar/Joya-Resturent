@@ -32,7 +32,7 @@ public class menu_item_ingredient_Test {
 			int rowsInserted =  pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			showErrorDialog("Error adding ingredient to database.", e.getMessage());
+			showErrorDialog("Error adding ingredient to database.", "You cant add the same ingredent there are a one ");
 		}
 		return g;
 	}
